@@ -83,9 +83,16 @@ check_source() {
 check_symbols() {
     main_o="$1"; graph_o="$2"; queue_o="$3"
     # Global (non-static) functions defined in each object file, by name
+    # Compiler-generated functions (like an implicit destructor) are weak symbols and
+    # are skipped: GNU nm marks them W, and macOS nm -m marks them "weak external".
     globals() {
-        nm -C --defined-only "$1" | awk '$2=="T"{ $1=""; $2=""; sub(/^  /,""); print }' |
-            sed -E 's/\[abi:[^]]*\]//g; s/\(.*//; s/^_main$/main/'
+        if [ "$(uname)" = Darwin ]; then
+            # macOS adds a leading underscore to every symbol, and nm -m does not demangle.
+            nm -m --defined-only "$1" | grep '(__TEXT,__text) external ' |
+                sed -E 's/.*\(__TEXT,__text\) external //; s/ \(.*\)$//; s/^_//' | c++filt -n
+        else
+            nm -C --defined-only "$1" | awk '$2=="T"{ $1=""; $2=""; sub(/^  /,""); print }'
+        fi | sed -E 's/\[abi:[^]]*\]//g; s/\(.*//; s/^_main$/main/'
     }
     for sym in $(globals "$main_o"); do
         [ "$sym" = "main" ] && continue
