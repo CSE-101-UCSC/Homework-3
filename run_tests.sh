@@ -143,7 +143,8 @@ for t in "${tests[@]}"; do
         else
             shown_cmd="./sixdegrees $(tr -d '\r\n' < "$dir/cmd" | sed "s#{input}#$dir/input.txt#; s#{output}#test_output/$t.txt#")"
         fi
-        expected_exit="$(tr -d '\r\n' < "$dir/expected_exit" 2>/dev/null || echo 0)"
+        expected_exit=0
+        [ -f "$dir/expected_exit" ] && expected_exit="$(tr -d '\r\n' < "$dir/expected_exit")"
         [ -n "$expected_exit" ] || expected_exit=0
 
         # Run inside the folder that holds the data file the test uses.
