@@ -25,6 +25,11 @@ strip_code() {
     perl -0777 -pe 's{//[^\n]*}{}g; s{/\*.*?\*/}{}gs; s{"(?:\\.|[^"\\\n])*"}{""}g; s{'"'"'(?:\\.|[^'"'"'\\\n])*'"'"'}{'"'"''"'"'}g' "$1"
 }
 
+# Remove only comments (keeps string literals, so quoted #include names stay readable).
+strip_comments() {
+    perl -0777 -pe 's{//[^\n]*}{}g; s{/\*.*?\*/}{}gs' "$1"
+}
+
 check_source() {
     # 1. Exactly the allowed source files
     for f in *.cpp *.cc *.cxx *.h *.hpp *.hh; do
@@ -53,14 +58,16 @@ check_source() {
     for f in main.cpp graph.cpp queue.cpp; do
         code=$(strip_code "$f")
 
-        # 3. Only allowed #includes
-        while read -r inc; do
-            [ -z "$inc" ] && continue
+        # 3. Only allowed #includes, each written as a plain #include <name> or #include "name"
+        #    (no macros, paths, #include_next, or #import).
+        while read -r line; do
+            [ -z "$line" ] && continue
+            inc=$(printf '%s\n' "$line" | sed -nE 's/^[[:space:]]*#[[:space:]]*include[[:space:]]*[<"]([A-Za-z_.]+)[>"][[:space:]]*$/\1/p')
             ok=0
-            for a in $ALLOWED_INCLUDES; do [ "$inc" = "$a" ] && ok=1; done
-            [ $ok -eq 1 ] || fail "$f includes <$inc>, which is not allowed." \
-                "Use only: <string> <iostream> <fstream> <sstream> <vector> <unordered_map> <cstdlib> \"graph.h\" \"queue.h\"."
-        done < <(printf '%s\n' "$code" | sed -nE 's/^[[:space:]]*#[[:space:]]*include[[:space:]]*[<"]([^>"]+)[>"].*/\1/p')
+            for a in $ALLOWED_INCLUDES; do [ -n "$inc" ] && [ "$inc" = "$a" ] && ok=1; done
+            [ $ok -eq 1 ] || fail "$f has a disallowed include: $(printf '%s' "$line" | tr -s ' \t' ' ')" \
+                "Use only: <string> <iostream> <fstream> <sstream> <vector> <unordered_map> <cstdlib> \"graph.h\" \"queue.h\", each on its own #include line."
+        done < <(strip_comments "$f" | grep -E '^[[:space:]]*#[[:space:]]*(include|include_next|import)')
 
         # 4. No library queue types
         if printf '%s\n' "$code" | grep -Eq '\b(queue|deque|priority_queue)[[:space:]]*<'; then
@@ -118,6 +125,21 @@ check_symbols() {
         for fn in $GRAPH_FUNCTIONS; do [ "$sym" = "$fn" ] && ok=1; done
         [ $ok -eq 1 ] || fail "graph.cpp defines a non-static function '$sym'." \
             "Mark helper functions static."
+    done
+    # graph.cpp must use the student's own Queue (it calls enqueue and dequeue from queue.cpp).
+    if [ "$(uname)" = Darwin ]; then
+        used=$(nm -u "$graph_o" | sed -E 's/^_//' | c++filt -n)
+    else
+        used=$(nm -C -u "$graph_o")
+    fi
+    # Not fatal here, so the starter still builds while you work on Part 1. Gradescope gives no
+    # credit for the BFS-based tests (Parts 3-5 and the queries that need BFS) until it does.
+    for fn in enqueue dequeue; do
+        printf '%s\n' "$used" | grep -Eq "(^|[[:space:]])$fn\(" || {
+            echo "NOTE: graph.cpp does not call $fn yet. Your BFS must use your own Queue from queue.h;" >&2
+            echo "      Gradescope gives no credit for BFS-based tests until graph.cpp calls enqueue and dequeue." >&2
+            break
+        }
     done
     # Every graph.h function is defined in graph.cpp with exactly the declared parameters:
     # link a program that takes the address of each one with its exact type.
