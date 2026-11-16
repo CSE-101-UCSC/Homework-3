@@ -87,7 +87,7 @@ To try your own queries, write them in a file (one per line) and run `./sixdegre
 make test                 # same as ./run_tests.sh
 ```
 
-There are two kinds of tests. **Function tests** (01 to 22) call one `queue.h` or `graph.h` function directly on a small graph built by the test, so they work even before `main.cpp` is finished. **Query tests** (23 to 52) run your whole program on an input file and compare the output file it writes.
+There are two kinds of tests. **Function tests** (01 to 19) call one `queue.h` or `graph.h` function directly on a small graph built by the test, so they work even before `main.cpp` is finished. **Query tests** (20 to 45) run your whole program on an input file and compare the output file it writes.
 
 For each failing test, the script shows the command, what the test checks, and a comparison:
 
@@ -100,7 +100,7 @@ line 2: Brad_Pitt Tom_Cruise
 
 A path answer is correct if it is **any** shortest path: it must start and end with the right actors, have as many hops as the expected path, and each pair of neighbors must really appear together in the movie between them. So your path may differ from the one in `expected.txt` and still pass. Every other answer must match exactly.
 
-When every test passes, it prints `All 52 tests passed!`. Your program's output file for every query test is saved in `test_output/`, and what it printed to `std::cerr` is saved next to it in a `.stderr.txt` file. Every test must finish within 10 seconds.
+When every test passes, it prints `All 45 tests passed!`. Your program's output file for every query test is saved in `test_output/`, and what it printed to `std::cerr` is saved next to it in a `.stderr.txt` file. Every test must finish within 10 seconds.
 
 These are the visible tests only. Gradescope also runs hidden tests, so passing everything here does not guarantee full credit. Write extra input files of your own and check the results by hand.
 

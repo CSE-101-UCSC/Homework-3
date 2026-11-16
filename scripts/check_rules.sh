@@ -6,11 +6,11 @@
 #
 # Do not modify this file. Gradescope runs the original.
 
-GRAPH_H_SHA256="ed5b40c3f1eb80ccc0a9c3149df76895ec6dfb019dd439baf069e032b7ccc316"
+GRAPH_H_SHA256="e1c12b713e3b0a1079624fca23a5020b5c06ec03d62a6a91f5f455d5c8014d6b"
 QUEUE_H_SHA256="f7e8932e543b562d8d92147cd1f52015ea0f3047fbc65f01de70a30d5cabb2b2"
 ALLOWED_INCLUDES="string iostream fstream sstream vector unordered_map cstdlib graph.h queue.h"
 QUEUE_FUNCTIONS="enqueue dequeue isEmpty clearQueue"
-GRAPH_FUNCTIONS="addActor findActor addMovie costars common bfs formatPath within bacon farthest avoid countShortestPaths spread countGroups groupSize meet"
+GRAPH_FUNCTIONS="addActor findActor addMovie costars common bfs formatPath within bacon farthest avoid countShortestPaths meet"
 
 fail() {
     echo "" >&2
@@ -164,13 +164,10 @@ int main() {
     int (*f14)(const Graph&, int) = farthest;
     int (*f15)(const Graph&, int, int, int) = avoid;
     int (*f16)(const Graph&, int, int) = countShortestPaths;
-    int (*f17)(const Graph&, const std::vector<int>&) = spread;
-    int (*f18)(const Graph&) = countGroups;
-    int (*f19)(const Graph&, int) = groupSize;
-    int (*f20)(const Graph&, int, int) = meet;
+    int (*f17)(const Graph&, int, int) = meet;
     void* all[] = {(void*)f1, (void*)f2, (void*)f3, (void*)f4, (void*)f5, (void*)f6, (void*)f7,
                    (void*)f8, (void*)f9, (void*)f10, (void*)f11, (void*)f12, (void*)f13, (void*)f14,
-                   (void*)f15, (void*)f16, (void*)f17, (void*)f18, (void*)f19, (void*)f20};
+                   (void*)f15, (void*)f16, (void*)f17};
     for (void* p : all) if (!p) return 1;
     return 0;
 }

@@ -18,25 +18,13 @@ static std::string number(int x) { return std::to_string(x); }
 static std::string answerQuery(const Graph& g, const std::vector<std::string>& words) {
     const std::string& kind = words[0];
 
-    if (kind == "GROUPS") return number(countGroups(g));
     if (kind == "BACON") return number(bacon(g, std::stoi(words[1])));
 
-    if (kind == "SPREAD") {
-        std::vector<int> seeds;
-        for (size_t i = 1; i < words.size(); i++) {
-            int id = findActor(g, words[i]);
-            if (id == -1) return "-1";
-            seeds.push_back(id);
-        }
-        return number(spread(g, seeds));
-    }
-
-    if (kind == "COSTARS" || kind == "FARTHEST" || kind == "GROUP" || kind == "WITHIN") {
+    if (kind == "COSTARS" || kind == "FARTHEST" || kind == "WITHIN") {
         int a = findActor(g, words[1]);
         if (a == -1) return "-1";
         if (kind == "COSTARS") return number(costars(g, a));
         if (kind == "FARTHEST") return number(farthest(g, a));
-        if (kind == "GROUP") return number(groupSize(g, a));
         return number(within(g, a, std::stoi(words[2])));
     }
 

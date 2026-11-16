@@ -7,6 +7,4 @@ BACON 2
 FARTHEST Kevin_Bacon
 AVOID Kevin_Bacon Morgan_Freeman Steven_Spielberg
 COUNT Harrison_Ford Lawrence_Kasdan
-SPREAD Lori_Singer Meryl_Streep
-GROUPS
 MEET Harrison_Ford Lawrence_Kasdan

@@ -205,23 +205,6 @@ static void count_basic() {
     CHECK(countShortestPaths(g, 0, 3) == 1, "A to D has 1 shortest path (A-C-D)");
     CHECK(countShortestPaths(g, 1, 3) == 2, "B to D has 2 shortest paths (B-C-D, B-E-D)");
 }
-static void spread_basic() {
-    Graph g = sample();
-    CHECK(spread(g, {0}) == 4, "from A alone the news needs 4 hops (to reach G)");
-    CHECK(spread(g, {0, 6}) == 2, "from A and G together, everyone is reached in 2 hops");
-    CHECK(spread(g, {7}) == 0, "from H, there is nobody to reach");
-}
-static void countGroups_basic() {
-    Graph g = sample();
-    CHECK(countGroups(g) == 3, "the sample graph has 3 groups (A..G, H, I-J)");
-    Graph e;
-    CHECK(countGroups(e) == 0, "an empty graph has 0 groups");
-}
-static void groupSize_basic() {
-    Graph g = sample();
-    CHECK(groupSize(g, 0) == 7 && groupSize(g, 6) == 7, "A's group has 7 actors");
-    CHECK(groupSize(g, 7) == 1 && groupSize(g, 9) == 2, "H is alone; I's group has 2");
-}
 static void meet_basic() {
     Graph g = sample();
     CHECK(meet(g, 0, 5) == 6, "A to F: A, B, C, D, E, F are all on some shortest path");
@@ -249,9 +232,6 @@ static const UnitTest TESTS[] = {
     {"farthest/basic", farthest_basic},
     {"avoid/basic", avoid_basic},
     {"countShortestPaths/basic", count_basic},
-    {"spread/basic", spread_basic},
-    {"countGroups/basic", countGroups_basic},
-    {"groupSize/basic", groupSize_basic},
     {"meet/basic", meet_basic},
 };
 

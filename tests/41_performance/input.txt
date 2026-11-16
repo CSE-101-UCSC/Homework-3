@@ -4,8 +4,6 @@ MEET Leng-Ying_Chen Nichole_Goetz
 AVOID Leng-Ying_Chen Nichole_Goetz Escalante_Lundy
 WITHIN Leng-Ying_Chen 2
 FARTHEST Escalante_Lundy
-SPREAD Leng-Ying_Chen Escalante_Lundy
-GROUP Nichole_Goetz
 COSTARS Leng-Ying_Chen
 COMMON Leng-Ying_Chen Escalante_Lundy
 Greg_Furman Craig_Parten
@@ -14,8 +12,6 @@ MEET Greg_Furman Craig_Parten
 AVOID Greg_Furman Craig_Parten Keanu_Reeves
 WITHIN Greg_Furman 2
 FARTHEST Keanu_Reeves
-SPREAD Greg_Furman Keanu_Reeves
-GROUP Craig_Parten
 COSTARS Greg_Furman
 COMMON Greg_Furman Keanu_Reeves
 June_Greyson Shannon_Walsh
@@ -24,8 +20,6 @@ MEET June_Greyson Shannon_Walsh
 AVOID June_Greyson Shannon_Walsh Joe_O'Conner
 WITHIN June_Greyson 2
 FARTHEST Joe_O'Conner
-SPREAD June_Greyson Joe_O'Conner
-GROUP Shannon_Walsh
 COSTARS June_Greyson
 COMMON June_Greyson Joe_O'Conner
 Nancy_Ellen_Shore Nick_Francke
@@ -34,8 +28,6 @@ MEET Nancy_Ellen_Shore Nick_Francke
 AVOID Nancy_Ellen_Shore Nick_Francke Sean_Alvarez
 WITHIN Nancy_Ellen_Shore 2
 FARTHEST Sean_Alvarez
-SPREAD Nancy_Ellen_Shore Sean_Alvarez
-GROUP Nick_Francke
 COSTARS Nancy_Ellen_Shore
 COMMON Nancy_Ellen_Shore Sean_Alvarez
 Jennifer_Bennett Tyree_Jamar
@@ -44,8 +36,6 @@ MEET Jennifer_Bennett Tyree_Jamar
 AVOID Jennifer_Bennett Tyree_Jamar Helen_Siff
 WITHIN Jennifer_Bennett 2
 FARTHEST Helen_Siff
-SPREAD Jennifer_Bennett Helen_Siff
-GROUP Tyree_Jamar
 COSTARS Jennifer_Bennett
 COMMON Jennifer_Bennett Helen_Siff
 Israel_Alexander Steven_Spielberg
@@ -54,7 +44,5 @@ MEET Israel_Alexander Steven_Spielberg
 AVOID Israel_Alexander Steven_Spielberg Nathan_McNelly
 WITHIN Israel_Alexander 2
 FARTHEST Nathan_McNelly
-SPREAD Israel_Alexander Nathan_McNelly
-GROUP Steven_Spielberg
 COSTARS Israel_Alexander
 COMMON Israel_Alexander Nathan_McNelly

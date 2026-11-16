@@ -1,8 +1,0 @@
-GROUPS
-GROUP Augusta_Dayton
-GROUP Justin_Spencer
-GROUP Morgan_Freeman
-GROUP Celeste_Lanuza
-GROUP Michael_Cera
-GROUP Dorothy_Rivlin_Clark
-GROUP Kevin_bacon

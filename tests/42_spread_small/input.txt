@@ -1,9 +1,0 @@
-SPREAD Douglas_Greenberg
-SPREAD George_Lucas
-SPREAD Tom_Hanks
-SPREAD Danny_Glover Harrison_Ford
-SPREAD Lori_Singer
-SPREAD Gary_Sinise
-SPREAD Lori_Singer Colin_Firth
-SPREAD Gavin_Polone Tom_Hanks Morgan_Freeman Gary_Sinise
-SPREAD Kevin_Bacon Tom_Hanks_Jr.

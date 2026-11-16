@@ -84,21 +84,6 @@ int countShortestPaths(const Graph& g, int a, int b) {
     return 0;
 }
 
-int spread(const Graph& g, const std::vector<int>& seeds) {
-    (void)g; (void)seeds;  // TODO
-    return 0;
-}
-
-int countGroups(const Graph& g) {
-    (void)g;  // TODO
-    return 0;
-}
-
-int groupSize(const Graph& g, int actor) {
-    (void)g; (void)actor;  // TODO
-    return 0;
-}
-
 int meet(const Graph& g, int a, int b) {
     (void)g; (void)a; (void)b;  // TODO
     return 0;

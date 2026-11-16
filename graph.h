@@ -51,9 +51,6 @@ int avoid(const Graph& g, int a, int b, int blocked);  // distance a to b withou
 
 // Part 5: new BFS techniques (Section 7)
 int countShortestPaths(const Graph& g, int a, int b);  // modulo 1,000,000,007
-int spread(const Graph& g, const std::vector<int>& seeds);
-int countGroups(const Graph& g);
-int groupSize(const Graph& g, int actor);
 int meet(const Graph& g, int a, int b);             // actors on some shortest a-b path
 
 #endif
