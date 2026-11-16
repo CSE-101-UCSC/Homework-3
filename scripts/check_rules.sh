@@ -6,11 +6,13 @@
 #
 # Do not modify this file. Gradescope runs the original.
 
-GRAPH_H_SHA256="e1c12b713e3b0a1079624fca23a5020b5c06ec03d62a6a91f5f455d5c8014d6b"
+GRAPH_H_SHA256="0ee50e279cb93399203ad8002253e90855e87b9b2659b402681aa0e007213344"
 QUEUE_H_SHA256="f7e8932e543b562d8d92147cd1f52015ea0f3047fbc65f01de70a30d5cabb2b2"
 ALLOWED_INCLUDES="string iostream fstream sstream vector unordered_map cstdlib graph.h queue.h"
 QUEUE_FUNCTIONS="enqueue dequeue isEmpty clearQueue"
-GRAPH_FUNCTIONS="addActor findActor addMovie costars common bfs formatPath within bacon farthest avoid countShortestPaths meet"
+GRAPH_FUNCTIONS="addActor findActor addMovie costars common bfs formatPath within farthest avoid countShortestPaths meet"
+# Removed in version 2 but still declared in graph.h: allowed in graph.cpp, never required.
+OPTIONAL_GRAPH_FUNCTIONS="bacon"
 
 fail() {
     echo "" >&2
@@ -107,7 +109,7 @@ check_symbols() {
              "Mark helper functions static. The graph.h functions go in graph.cpp, the queue.h functions in queue.cpp."
     done
     for sym in $(globals "$queue_o"); do
-        for fn in $GRAPH_FUNCTIONS; do
+        for fn in $GRAPH_FUNCTIONS $OPTIONAL_GRAPH_FUNCTIONS; do
             [ "$sym" = "$fn" ] && fail "queue.cpp defines the graph function '$sym'." \
                 "Move $sym to graph.cpp."
         done
@@ -122,7 +124,7 @@ check_symbols() {
                 "Move $sym to queue.cpp; graph.cpp uses the queue through #include \"queue.h\"."
         done
         ok=0
-        for fn in $GRAPH_FUNCTIONS; do [ "$sym" = "$fn" ] && ok=1; done
+        for fn in $GRAPH_FUNCTIONS $OPTIONAL_GRAPH_FUNCTIONS; do [ "$sym" = "$fn" ] && ok=1; done
         [ $ok -eq 1 ] || fail "graph.cpp defines a non-static function '$sym'." \
             "Mark helper functions static."
     done
@@ -160,14 +162,13 @@ int main() {
     void (*f10)(const Graph&, int, int, int, std::vector<int>&, std::vector<Edge>&) = bfs;
     std::string (*f11)(const Graph&, int, int, const std::vector<Edge>&) = formatPath;
     int (*f12)(const Graph&, int, int) = within;
-    int (*f13)(const Graph&, int) = bacon;
-    int (*f14)(const Graph&, int) = farthest;
-    int (*f15)(const Graph&, int, int, int) = avoid;
-    int (*f16)(const Graph&, int, int) = countShortestPaths;
-    int (*f17)(const Graph&, int, int) = meet;
+    int (*f13)(const Graph&, int) = farthest;
+    int (*f14)(const Graph&, int, int, int) = avoid;
+    int (*f15)(const Graph&, int, int) = countShortestPaths;
+    int (*f16)(const Graph&, int, int) = meet;
     void* all[] = {(void*)f1, (void*)f2, (void*)f3, (void*)f4, (void*)f5, (void*)f6, (void*)f7,
                    (void*)f8, (void*)f9, (void*)f10, (void*)f11, (void*)f12, (void*)f13, (void*)f14,
-                   (void*)f15, (void*)f16, (void*)f17};
+                   (void*)f15, (void*)f16};
     for (void* p : all) if (!p) return 1;
     return 0;
 }

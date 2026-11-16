@@ -9,7 +9,7 @@ appears together in the movie between them. Prints nothing if every line is corr
 """
 import sys
 
-KEYWORDS = {'COSTARS', 'COMMON', 'WITHIN', 'BACON', 'FARTHEST', 'AVOID', 'COUNT', 'MEET'}
+KEYWORDS = {'COSTARS', 'COMMON', 'WITHIN', 'FARTHEST', 'AVOID', 'COUNT', 'MEET'}
 
 
 def read_lines(path):

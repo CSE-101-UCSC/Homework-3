@@ -45,7 +45,7 @@ std::string formatPath(const Graph& g, int source, int target,
 
 // Part 4: one BFS, different questions (Section 6)
 int within(const Graph& g, int actor, int k);       // actors 1 to k hops away
-int bacon(const Graph& g, int k);                   // actors exactly k hops from Kevin_Bacon
+int bacon(const Graph& g, int k);                   // REMOVED in version 2: optional, not graded
 int farthest(const Graph& g, int actor);            // largest distance from actor
 int avoid(const Graph& g, int a, int b, int blocked);  // distance a to b without blocked
 

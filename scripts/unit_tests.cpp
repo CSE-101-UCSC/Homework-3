@@ -180,11 +180,6 @@ static void within_basic() {
     CHECK(within(g, 0, 2) == 4, "within(A, 2) is 4 (B, C, D, E)");
     CHECK(within(g, 0, 0) == 0, "within(A, 0) is 0: the actor never counts");
 }
-static void bacon_levels() {
-    Graph g = sample("Kevin_Bacon");
-    int want[6] = {1, 2, 2, 1, 1, 0};
-    for (int k = 0; k < 6; k++) CHECK(bacon(g, k) == want[k], "wrong count of actors with Bacon number k");
-}
 static void farthest_basic() {
     Graph g = sample();
     CHECK(farthest(g, 0) == 4 && farthest(g, 6) == 4, "A and G are 4 hops apart");
@@ -228,7 +223,6 @@ static const UnitTest TESTS[] = {
     {"formatPath/one-hop", formatPath_one_hop},
     {"formatPath/multi-hop", formatPath_multi_hop},
     {"within/basic", within_basic},
-    {"bacon/levels", bacon_levels},
     {"farthest/basic", farthest_basic},
     {"avoid/basic", avoid_basic},
     {"countShortestPaths/basic", count_basic},

@@ -60,11 +60,6 @@ int within(const Graph& g, int actor, int k) {
     return 0;
 }
 
-int bacon(const Graph& g, int k) {
-    (void)g; (void)k;  // TODO
-    return 0;
-}
-
 int farthest(const Graph& g, int actor) {
     (void)g; (void)actor;  // TODO
     return 0;

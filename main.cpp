@@ -18,8 +18,6 @@ static std::string number(int x) { return std::to_string(x); }
 static std::string answerQuery(const Graph& g, const std::vector<std::string>& words) {
     const std::string& kind = words[0];
 
-    if (kind == "BACON") return number(bacon(g, std::stoi(words[1])));
-
     if (kind == "COSTARS" || kind == "FARTHEST" || kind == "WITHIN") {
         int a = findActor(g, words[1]);
         if (a == -1) return "-1";
